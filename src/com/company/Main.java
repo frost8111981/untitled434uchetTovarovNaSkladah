@@ -34,7 +34,7 @@ public class Main {
                 storageMap.get(storage2).add(product);
             }
         }
-
+        System.out.println();
         System.out.println("Вывод");
         for (Storage storage : storageMap.keySet()) {
             System.out.println("- " + storage + ":");
@@ -43,14 +43,20 @@ public class Main {
                 System.out.println(product);
             }
         }
-
+        System.out.println("---------------------------------------------");
         System.out.println("Для поиска товара введите его номер");
         String inputSearch = sc.nextLine();
 
 
-        for (Storage storageSearch : storageMap.keySet()){  // Получаем список всех ключей storageMap
-            Set<Product> productMapSearch = storageMap.get(inputSearch);
-            System.out.println(productMapSearch);
+        for (Storage storageSearch : storageMap.keySet()){  // Получаем список всех ключей storageMap( в цикле пробегаем по первому складу)
+            Set<Product> productMapSearch = storageMap.get(storageSearch); // в переменную productMapSearch добавляем 1-й склад
+            for (Product productSearch : productMapSearch) { // в цикле пробегаем по 1-му складу
+                if(productSearch.getId().equals(inputSearch)){ // если находим этот айди то выводим
+                    System.out.println("Продукт найден:" + productSearch.getName());
+                    break;
+                }
+
+            }
         }
     }
 }
